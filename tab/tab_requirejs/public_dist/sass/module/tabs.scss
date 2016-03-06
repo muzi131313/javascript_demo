@@ -1,0 +1,20 @@
+@charset "utf-8";
+/* CSS Document */
+
+body{
+    font-family: '微软雅黑';font-size:16px;
+    #tab{
+        padding:20px;
+        #tab-title{
+            line-height:32px;font-size:14px;margin-left:3px;
+            span{display:inline-block;width:60px;text-align:center;border:1px solid gray;border-bottom-width:0;margin-right:10px;cursor:pointer;}
+            .select{margin-bottom:-2px;border-bottom:2px solid white;border-top: 2px solid red;}
+        }
+        #tab-content{
+            font-size:14px;border:1px solid green;border-top:2px solid red;padding:5px;
+            section{display:none;}
+            .select{display:block;}
+            ul li{list-style:none;height:24px;line-height:24px;}
+        }
+    }
+}

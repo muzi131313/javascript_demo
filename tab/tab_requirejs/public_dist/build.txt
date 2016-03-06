@@ -1,0 +1,14 @@
+
+scripts/views/enterjs/main.js
+----------------
+scripts/libs/jquery.js
+scripts/views/common/utils.js
+scripts/views/common/tabs.js
+scripts/views/enterjs/main.js
+
+scripts/views/enterjs/main2.js
+----------------
+scripts/libs/jquery.js
+scripts/views/common/utils.js
+scripts/views/common/tabs.js
+scripts/views/enterjs/main2.js
