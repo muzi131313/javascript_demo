@@ -1,11 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
-<head lang="en">
+<head>
     <meta charset="UTF-8">
-    <title>实践题 - 选项卡</title>
-    <link rel="stylesheet" href="css/tab.css" media="screen" title="no title" charset="utf-8">
-
+    <title>tab-seajs</title>
 </head>
 
 <body>
@@ -45,8 +43,22 @@
         </div>
     </div>
 
-    <script src="scripts/libs/require.js" data-main="scripts/views/enterjs/main"></script>
+    <link rel="stylesheet" href="../static/tab/src/tabs.css" media="screen" title="no title" charset="utf-8">
 
+    <script src="../sea-modules/sea.js" charset="utf-8"></script>
+    <script type="text/javascript">
+        // seajs 的简单配置
+        seajs.config({
+            base: "../sea-modules/",
+            alias: {
+                "jquery": "jquery.js",
+                "utils": "../../common/utils.js"
+            }
+        })
+
+        // 加载入口模块
+        seajs.use("../static/tab/src/tabs")
+    </script>
 </body>
 
 </html>
