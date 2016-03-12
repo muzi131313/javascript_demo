@@ -57,7 +57,9 @@
         })
 
         // 加载入口模块
-        seajs.use("../static/tab/src/tabs")
+        seajs.use("../static/tab/src/tabs", function(tab){
+            tab.changeTab();
+        })
     </script>
 </body>
 

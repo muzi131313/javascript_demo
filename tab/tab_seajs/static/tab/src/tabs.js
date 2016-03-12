@@ -6,20 +6,18 @@ define(function(require, exports, module) {
     // require("./tabs");
     var utils = require('utils');
 
+    var tabTitleDom = document.getElementById('tab-title'),
+        tabContentDom = document.getElementById('tab-content'),
+        tabTitle = utils.getChildren(tabTitleDom),
+        tabContent = utils.getChildren(tabContentDom),
+        selectClass = 'select';
+
     // 通过 exports 对外提供接口
     exports.init = function() {
 
     }
 
-
-    var tabTitleDom = document.getElementById('tab-title'),
-        tabContentDom = document.getElementById('tab-content'),
-        tabTitle = utils.getChildren(tabTitleDom),
-        tabContent = utils.getChildren(tabContentDom),
-        selectClass = 'select',
-        me = {};
-
-    me.removeClass = function() {
+    exports.removeClass = function() {
         utils.each(tabTitle, function(i, span) {
             utils.removeClass(span, selectClass);
         });
@@ -27,10 +25,10 @@ define(function(require, exports, module) {
             utils.removeClass(section, selectClass);
         });
     };
-    me.changeTab = function() {
+    exports.changeTab = function() {
         utils.each(tabTitle, function(i, span) {
             utils.addEvent(span, 'click', function(e) {
-                me.removeClass();
+                exports.removeClass();
                 e = e || event;
                 var t = e.target || e.srcElement
 
@@ -47,7 +45,5 @@ define(function(require, exports, module) {
             })
         });
     };
-
-    me.changeTab();
 
 });
