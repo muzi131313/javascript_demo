@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>object oriented</title>
+    <link rel="stylesheet" href="../main.css" media="screen" title="no title" charset="utf-8">
+</head>
+
+<body>
+    <div class="page layout-lm">
+        <div class="wrap-top-bar">
+            <div id="top-bar">
+
+            </div>
+        </div>
+        <div class="wrap-container">
+            <div id="container">
+                <div id="main">
+                    <div id="inner-banner">
+
+                    </div>
+                    <!-- inner-banner: 左边侧边栏-->
+                    <div id="inner-main">
+                        <div id="form-page">
+                            <h2 class="title">注册表单</h2>
+                            <form method="post" action="#" class="form form-horizontal" id="register_form" onsubmit="return check();">
+                                <div class="form-item">
+                                    <label class="form-label" for="username">昵称：<span class="form-required">*</span></label>
+                                    <div class="form-field">
+                                        <input type="text" placeholder="6-32个字符" class="form-text" id="username" name="username">
+                                        <span class="success">昵称可用</span>
+                                    </div>
+                                </div>
+                                <div class="form-item">
+                                    <label class="form-label" for="avatar">头像：</label>
+                                    <div class="form-field">
+                                        <div class="form-file-wrap"><span class="form-file-replace-text">选择文件</span>
+                                            <input type="file" class="form-file" size="1" name="avatar" id="avatar">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-item">
+                                    <label class="form-label" for="name">邮箱：<span class="form-required">*</span></label>
+                                    <div class="form-field">
+                                        <input type="email" class="form-text" id="email" name="email">
+                                        <span class="error">请输入正确的邮箱格式</span>
+                                    </div>
+                                </div>
+                                <div class="form-item">
+                                    <label class="form-label" for="pwd">密码：<span class="form-required">*</span></label>
+                                    <div class="form-field">
+                                        <input type="password" name="pwd" id="pwd" class="form-text">
+                                    </div>
+                                </div>
+                                <div class="form-item">
+                                    <label class="form-label">性别：</label>
+                                    <div class="form-field form-field-rc">
+                                        <label class="form-label-rc">
+                                            <input type="radio" checked="checked" value="man" class="form-radio" name="sex">
+                                            <span>男</span>
+                                        </label>
+                                        <label class="form-label-rc">
+                                            <input type="radio" value="woman" class="form-radio" name="sex">
+                                            <span>女</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-item">
+                                    <label class="form-label">Options：</label>
+                                    <div class="form-field form-field-rc field-rc-block">
+                                        <label class="form-label-rc">
+                                            <input type="checkbox" checked="checked" value="1" class="form-checkbox" name=""><span>Option one is this and that—be sure to include why it’s great</span></label>
+                                        <label class="form-label-rc">
+                                            <input type="checkbox" value="2" class="form-checkbox" name=""><span>Option two can also be checked and included in form results </span></label>
+                                        <label class="form-label-rc">
+                                            <input type="checkbox" value="3" class="form-checkbox" name=""><span>Option three can—yes, you guessed it—also be checked and included in form results </span></label>
+                                    </div>
+                                </div>
+                                <div class="form-item">
+                                    <label class="form-label" for="realname">姓名：</label>
+                                    <div class="form-field">
+                                        <input type="text" placeholder="请填入真实姓名" class="form-text" id="realname" name="realname">
+                                    </div>
+                                </div>
+                                <div class="form-item">
+                                    <label class="form-label">证件号码：</label>
+                                    <div class="form-field form-id-num-wrap">
+                                        <select class="form-select inline-ele" name="id_type" size="1" id="id_type">
+                                            <option selected="selected" value="1">身份证</option>
+                                            <option value="2">学生证</option>
+                                            <option value="3">军官证</option>
+                                        </select>
+                                        <input type="text" class="form-text" id="id_text" name="id_text">
+                                    </div>
+                                </div>
+                                <div class="form-item">
+                                    <label class="form-label">个人简介：</label>
+                                    <div class="form-field">
+                                        <textarea class="form-textarea" id="intro" name="intro"></textarea>
+                                        <p class="form-des">说明注释文字可以放在这里啊</p>
+                                    </div>
+                                </div>
+                                <div class="form-item">
+                                    <label class="form-label" for="interest">爱好：<span class="form-required">*</span></label>
+                                    <div class="form-field">
+                                        <input type="email" class="form-text disabled" id="interest" name="interest" disabled="" placeholder="禁用">
+                                    </div>
+                                </div>
+                                <div class="form-item">
+                                    <label class="form-label" for="codetext">验证码：</label>
+                                    <div class="form-field form-code-text-wrap">
+                                        <input type="text" class="form-text text-captcha" name="codetext" id="codetext">
+                                        <span class="form-captcha"><img src="../code.jpg" alt="" id="codePic" width="58"></span>
+                                    </div>
+                                </div>
+                                <div class="form-item">
+                                    <div class="form-field form-field-rc">
+                                        <label class="form-label-rc">
+                                            <input type="checkbox" checked="checked" value="1" class="form-checkbox" name="">
+                                            <span>我同意所有条款……</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-action  action-left">
+                                    <input type="submit" class="formbtn btn-primary" value="提交">
+                                </div>
+                            </form>
+                            <!-- 第一个form表单-->
+
+
+                            <h2 class="title">登录表单</h2>
+                            <form method="get" action="#" class="form-horizontal form" id="login_form" onsubmit="return check();">
+                                <div class="form-item">
+                                    <label class="form-label" for="username">用户名：</label>
+                                    <div class="form-field">
+                                        <input type="text" class="form-text" id="username" name="username">
+                                    </div>
+                                </div>
+                                <div class="form-item">
+                                    <label class="form-label" for="pwd">密码：</label>
+                                    <div class="form-field">
+                                        <input type="password" class="form-text" id="pwd" name="pwd">
+                                    </div>
+                                </div>
+                                <div class="form-item">
+                                    <div class="form-field form-field-rc">
+                                        <label class="form-label-rc">
+                                            <input type="checkbox" name="" class="form-checkbox" value="1" checked="checked">
+                                            <span>下次自动登录</span>
+                                        </label>
+                                        <a class="forget-link" href="#">忘记密码？</a>
+                                    </div>
+                                </div>
+                                <div class="form-action action-left">
+                                    <input type="submit" class="formbtn btn-primary" value="登录">
+                                    <a class="btn-right" href="#">注册</a>
+                                </div>
+                            </form>
+                            <!-- 第二个form表单-->
+                        </div>
+                        <!-- form page-->
+                    </div>
+                    <!-- inner-main: 右面主页-->
+                </div>
+                <!-- main-->
+            </div>
+            <!-- container-->
+        </div>
+        <div class="wrap-footer">
+            <div id="footer">
+                <div class="inner-footer">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        // html from: http://tobe.w3cplus.com/example/form/form.html
+        // javascript: 面向对象编程
+        (function(win) {
+            var check,
+                type = 1; // change this value, to callback different method
+            switch (type) {
+                case 1: // 1.初始写法,污染全局变量
+                    check = function() {
+                        function checkUsername(){}
+                        function checkPassword(){}
+
+                        if(!checkUsername() || !checkPassword()) return false;
+                        return true;
+                    }
+                    break;
+                case 2: // 2.等同第一种，区别第一个是声明的是函数，第二个是把匿名函数赋值到一个变量上
+                    check = function(){
+                        var checkUsername = function(){},
+                            checkPassword = function(){};
+
+                        if(!checkUsername() || !checkPassword()) return false;
+                        return true;
+                    }
+                    break;
+                case 3: // 3.使用对象收遍变量
+                    check = function(){
+                        var checkObject = {
+                            checkUsername: function(){},
+                            checkPassword: function(){}
+                        }
+
+                        if(!checkObject.checkUsername() || !checkObject.checkPassword()) return false;
+                        return true;
+                    }
+                    break;
+                case 4: // 4.对象的另外一种，函数的静态变量上，新创建对象无法继承这些函数，也就无法调用
+                    check = function(){
+                        var checkObject = function(){};
+                        checkObject.checkUsername = function(){}
+                        checkObject.checkPassword = function(){}
+
+                        if(!checkObject.checkUsername() || !checkObject.checkPassword()) return false;
+                        return true;
+                    }
+                    break;
+                case 5: // 5.返回一个object对象，每调用一次checkObject（或新创建一个对象），会新创建出一个object对象
+                    check = function(){
+                        var checkObject = function(){
+                            return {
+                                checkUsername: function(){},
+                                checkPassword: function(){}
+                            }
+                        }, a = checkObject();
+
+                        if(!a.checkUsername() || !a.checkPassword()) return false;
+                        return true;
+                    }
+                    break;
+                case 6: // 6.绑定函数到新创建的对象上，5中checkUsername和新创建的对象则没有绑定关系
+                    check = function(){
+                        var checkObject = function(){
+                            this.checkUsername = function(){}
+                            this.checkPassword = function(){}
+                        }, a = new checkObject();
+
+                        if(!a.checkUsername() || !a.checkPassword()) return false;
+                        return true;
+                    }
+                    break;
+                case 7: // 5、6每次新调用/创建对象，都会创建新的自己的方法，这种消耗是奢侈，所以可以绑定到checkObject的原型上
+                    check = function(){
+                        var checkObject = function(){},
+                        checkObject.prototype.checkUsername = function(){},
+                        checkObject.prototype.checkPassword = function(){},
+                        a = new checkObject(); // js中函数的特性(原型链)：当前对象上找不到此函数时，会去原型上不找，如果原型上也找不到，会去父级原型去找；如果找不到，则返回undefined
+
+                        if(!a.checkUsername() || !a.checkPassword()) return false;
+                        return true;
+                    }
+                    break;
+                case 8: // 等同第7中写法，与上一种不能混用
+                    check = function(){
+                        var checkObject = function(){},
+                        checkObject.prototype = {
+                            checkUsername: function(){},
+                            checkPassword: function(){}
+                        }, a = new checkObject():
+
+                        if(!a.checkUsername() || !a.checkPassword()) return false;
+                        return true;
+                    }
+                    break;
+                case 9: // 第7的升级，链式调用
+                    check = function(){
+                        var checkObject = function(){},
+                        checkObject.prototype.checkUsername = function(){
+                            this.resultA = false;
+                            return this;
+                        },
+                        checkObject.prototype.checkPassword = function(){
+                            this.resultB = false;
+                            return this;
+                        },
+                        a = new checkObject().checkUsername().checkPassword();
+
+                        return a.resultA && a.resultB;
+                    }
+                    break;
+                case 10: // 污染全局Function原型的一种做法(禁止)
+                    check = function(){
+                        Function.prototype.checkUsername = function(){};
+                        Function.prototype.checkPassword = function(){};
+                        var a = new Function(); // a = function(){}
+
+                        if(!a.checkUsername() || !a.checkPassword()) return false;
+                        return true;
+                    }
+                    break;
+                case 11: // 曙光:抽象出函数添加，并链式添加
+                    check = function() {
+                        Function.prototype.addMethod = function(name, fn){
+                            this[name] = fn;
+                            return this;
+                        }
+                        var methods = function(){};
+                        methods.addMethod('checkUsername', function(){
+                            this.resultA = false; // check result
+                            return this; // return self for the chaining callback
+                        }).addMethod('checkPassword', function(){
+                            this.resultB = false; // check result
+                            return this; // return self for the chaining callback
+                        });
+                        a = methods.checkUsername().checkPassword();
+
+                        // TODO: some question, where does the method of checkUsername add?
+
+                        return a.resultA && a.resultB;
+                    }
+                    break;
+                case 12: // 放在原型上,调用则通过new创建出来的对象
+                    check = function() {
+                        Function.prototype.addMethod = function(name, fn){
+                            this.prototype[name] = fn;
+                            return this;
+                        }
+                        var Methods = function(){ // 防止，直接通过Methods()直接调用，而没有创建对象
+                            if(this instanceof Methods){
+                                return this;
+                            }else{
+                                return new Methods(arguments);
+                            }
+                        };
+                        Methods.addMethod('checkUsername', function(){
+                            this.resultA = false; // check result
+                            return this; // return self for the chaining callback
+                        }).addMethod('checkPassword', function(){
+                            this.resultB = false; // check result
+                            return this; // return self for the chaining callback
+                        });
+                        a = new Methods().checkUsername().checkPassword();
+
+                        return a.resultA && a.resultB;
+                    }
+                    break;
+                default:
+
+            }
+
+            // 问题
+            // 1.如何实现方法的链式调用
+            // 答：添加函数的时候，同时返回自身对象
+
+            // 2.定义一个为函数添加多个方法的addMethod方法
+            var Utils = function(){};
+            Utils.prototype.addMethod = function(name, fn){
+                this[name] = fn;
+            }
+            Utils.addMethod('each', function(arr, callback){
+                if(!arr) return false;
+                var i = 0, len = arr.length, singleObj, isBreak;
+                for(;singleObj = arr[i++];){
+                    isBreak = callback && callback.call(this, singleObj);
+                    if(isBreak) break;
+                }
+            }).addMethod('type', function(value){
+                var result = Object.prototype.toString.call(value);
+                if(!value) return undefined;
+                var prefix = '[object '
+                return result.substring(result.indexOf('[')+prefix.length,result.indexOf(']')).toLowerCase();
+            })
+
+            var arr = [1, 23];
+            // TODO: is this right?
+
+            // 3.定义一个既可以为函数原型添加方法，又可以为自己添加方法的addMethod方法
+            // TODO:?
+
+            // last check method
+            win.check = check;
+        })(window);
+    </script>
+</body>
+
+</html>
