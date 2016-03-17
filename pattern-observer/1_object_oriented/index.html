@@ -179,132 +179,137 @@
         // html from: http://tobe.w3cplus.com/example/form/form.html
         // javascript: 面向对象编程
         (function(win) {
+            'use strict';
             var check,
                 type = 1; // change this value, to callback different method
             switch (type) {
                 case 1: // 1.初始写法,污染全局变量
                     check = function() {
-                        function checkUsername(){}
-                        function checkPassword(){}
+                        function checkUsername() {}
 
-                        if(!checkUsername() || !checkPassword()) return false;
+                        function checkPassword() {}
+
+                        if (!checkUsername() || !checkPassword()) return false;
                         return true;
                     }
                     break;
                 case 2: // 2.等同第一种，区别第一个是声明的是函数，第二个是把匿名函数赋值到一个变量上
-                    check = function(){
-                        var checkUsername = function(){},
-                            checkPassword = function(){};
+                    check = function() {
+                        var checkUsername = function() {},
+                            checkPassword = function() {};
 
-                        if(!checkUsername() || !checkPassword()) return false;
+                        if (!checkUsername() || !checkPassword()) return false;
                         return true;
                     }
                     break;
                 case 3: // 3.使用对象收遍变量
-                    check = function(){
+                    check = function() {
                         var checkObject = {
-                            checkUsername: function(){},
-                            checkPassword: function(){}
+                            checkUsername: function() {},
+                            checkPassword: function() {}
                         }
 
-                        if(!checkObject.checkUsername() || !checkObject.checkPassword()) return false;
+                        if (!checkObject.checkUsername() || !checkObject.checkPassword()) return false;
                         return true;
                     }
                     break;
                 case 4: // 4.对象的另外一种，函数的静态变量上，新创建对象无法继承这些函数，也就无法调用
-                    check = function(){
-                        var checkObject = function(){};
-                        checkObject.checkUsername = function(){}
-                        checkObject.checkPassword = function(){}
+                    check = function() {
+                        var checkObject = function() {};
+                        checkObject.checkUsername = function() {}
+                        checkObject.checkPassword = function() {}
 
-                        if(!checkObject.checkUsername() || !checkObject.checkPassword()) return false;
+                        if (!checkObject.checkUsername() || !checkObject.checkPassword()) return false;
                         return true;
                     }
                     break;
                 case 5: // 5.返回一个object对象，每调用一次checkObject（或新创建一个对象），会新创建出一个object对象
-                    check = function(){
-                        var checkObject = function(){
-                            return {
-                                checkUsername: function(){},
-                                checkPassword: function(){}
-                            }
-                        }, a = checkObject();
+                    check = function() {
+                        var checkObject = function() {
+                                return {
+                                    checkUsername: function() {},
+                                    checkPassword: function() {}
+                                }
+                            },
+                            a = checkObject();
 
-                        if(!a.checkUsername() || !a.checkPassword()) return false;
+                        if (!a.checkUsername() || !a.checkPassword()) return false;
                         return true;
                     }
                     break;
                 case 6: // 6.绑定函数到新创建的对象上，5中checkUsername和新创建的对象则没有绑定关系
-                    check = function(){
-                        var checkObject = function(){
-                            this.checkUsername = function(){}
-                            this.checkPassword = function(){}
-                        }, a = new checkObject();
+                    check = function() {
+                        var checkObject = function() {
+                                this.checkUsername = function() {}
+                                this.checkPassword = function() {}
+                            },
+                            a = new checkObject();
 
-                        if(!a.checkUsername() || !a.checkPassword()) return false;
+                        if (!a.checkUsername() || !a.checkPassword()) return false;
                         return true;
                     }
                     break;
                 case 7: // 5、6每次新调用/创建对象，都会创建新的自己的方法，这种消耗是奢侈，所以可以绑定到checkObject的原型上
-                    check = function(){
-                        var checkObject = function(){},
-                        checkObject.prototype.checkUsername = function(){},
-                        checkObject.prototype.checkPassword = function(){},
+                    check = function() {
+                        var checkObject = function() {};
+                        checkObject.prototype.checkUsername = function() {};
+                        checkObject.prototype.checkPassword = function() {};
                         a = new checkObject(); // js中函数的特性(原型链)：当前对象上找不到此函数时，会去原型上不找，如果原型上也找不到，会去父级原型去找；如果找不到，则返回undefined
 
-                        if(!a.checkUsername() || !a.checkPassword()) return false;
+                        if (!a.checkUsername() || !a.checkPassword()) return false;
                         return true;
                     }
                     break;
                 case 8: // 等同第7中写法，与上一种不能混用
-                    check = function(){
-                        var checkObject = function(){},
+                    check = function() {
+                        var checkObject = function() {};
                         checkObject.prototype = {
-                            checkUsername: function(){},
-                            checkPassword: function(){}
-                        }, a = new checkObject():
+                            checkUsername: function() {},
+                            checkPassword: function() {}
+                        };
+                        var a = new checkObject();
 
-                        if(!a.checkUsername() || !a.checkPassword()) return false;
+                        if (!a.checkUsername() || !a.checkPassword()) return false;
                         return true;
                     }
                     break;
                 case 9: // 第7的升级，链式调用
-                    check = function(){
-                        var checkObject = function(){},
-                        checkObject.prototype.checkUsername = function(){
+                    check = function() {
+                        var checkObject = function() {};
+                        checkObject.prototype.checkUsername = function() {
                             this.resultA = false;
                             return this;
-                        },
-                        checkObject.prototype.checkPassword = function(){
+                        };
+                        checkObject.prototype.checkPassword = function() {
                             this.resultB = false;
                             return this;
-                        },
-                        a = new checkObject().checkUsername().checkPassword();
+                        };
+                        var a = new checkObject().checkUsername().checkPassword();
 
                         return a.resultA && a.resultB;
                     }
                     break;
                 case 10: // 污染全局Function原型的一种做法(禁止)
-                    check = function(){
-                        Function.prototype.checkUsername = function(){};
-                        Function.prototype.checkPassword = function(){};
+                    check = function() {
+                        Function.prototype.checkUsername = function() {};
+                        Function.prototype.checkPassword = function() {};
                         var a = new Function(); // a = function(){}
 
-                        if(!a.checkUsername() || !a.checkPassword()) return false;
+                        if (!a.checkUsername() || !a.checkPassword()) return false;
                         return true;
                     }
                     break;
                 case 11: // 曙光:抽象出函数添加，并链式添加
                     check = function() {
-                        Function.prototype.addMethod = function(name, fn){
+                        Function.prototype.addMethod = function(name, fn) {
                             this[name] = fn;
                             return this;
                         }
-                        var methods = function(){};
-                        methods.addMethod('checkUsername', function(){
+                        var methods = function() {};
+                        methods.addMethod('checkUsername', function() {
                             this.resultA = false; // check result
                             return this; // return self for the chaining callback
-                        }).addMethod('checkPassword', function(){
+                        }).addMethod('checkPassword', function() {
                             this.resultB = false; // check result
                             return this; // return self for the chaining callback
                         });
@@ -317,21 +322,21 @@
                     break;
                 case 12: // 放在原型上,调用则通过new创建出来的对象
                     check = function() {
-                        Function.prototype.addMethod = function(name, fn){
+                        Function.prototype.addMethod = function(name, fn) {
                             this.prototype[name] = fn;
                             return this;
                         }
-                        var Methods = function(){ // 防止，直接通过Methods()直接调用，而没有创建对象
-                            if(this instanceof Methods){
+                        var Methods = function() { // 防止，直接通过Methods()直接调用，而没有创建对象
+                            if (this instanceof Methods) {
                                 return this;
-                            }else{
+                            } else {
                                 return new Methods(arguments);
                             }
                         };
-                        Methods.addMethod('checkUsername', function(){
+                        Methods.addMethod('checkUsername', function() {
                             this.resultA = false; // check result
                             return this; // return self for the chaining callback
-                        }).addMethod('checkPassword', function(){
+                        }).addMethod('checkPassword', function() {
                             this.resultB = false; // check result
                             return this; // return self for the chaining callback
                         });
@@ -344,34 +349,240 @@
 
             }
 
-            // 问题
-            // 1.如何实现方法的链式调用
-            // 答：添加函数的时候，同时返回自身对象
+            var answerType = 3, // change this value will show different answers
+                answer;
+            switch (answerType) {
+                case 1:
+                case 2:
+                    answer = function() {
+                        // 问题
+                        // 1.如何实现方法的链式调用
+                        // 答：添加函数的时候，同时返回自身对象
 
-            // 2.定义一个为函数添加多个方法的addMethod方法
-            var Utils = function(){};
-            Utils.prototype.addMethod = function(name, fn){
-                this[name] = fn;
+                        // 2.定义一个为函数添加多个方法的addMethod方法
+                        // function(){} same to: new Function();
+                        Function.prototype.addMethod = function(name, fn) {
+                            this[name] = fn;
+                            return this;
+                        }
+
+                        Function.prototype.addMethods = function(opts) {
+                            if (Object.prototype.toString.call(opts) != '[object Object]') {
+                                throw new Error('opts is not object!');
+                            }
+                            var key, value;
+                            for (key in opts) {
+                                value = opts[key];
+                                if (Object.prototype.toString.call(value) != '[object Function]') throw new Error('value(' + value + ') is not function');
+                                this[key] = value;
+                            }
+                            return this;
+                        }
+
+                        // use addMethod
+                        var Utils = function() {};
+                        Utils.addMethod('each', function(arr, callback) {
+                            if (!arr) return false;
+                            var i = 0,
+                                len = arr.length,
+                                singleObj, isBreak;
+                            for (; singleObj = arr[i++];) {
+                                isBreak = callback && callback.call(this, i, singleObj);
+                                if (isBreak) break;
+                            }
+                            return this;
+                        }).addMethod('type', function(value, callback) {
+                            var result = Object.prototype.toString.call(value);
+                            if (!value) return undefined;
+                            var prefix = '[object ',
+                                type;
+                            type = result.substring(result.indexOf('[') + prefix.length, result.indexOf(']')).toLowerCase();
+                            callback.call(this, type);
+                            return this;
+                        }).addMethod('log', function() {
+                            console && console.info('Utils:\t', arguments);
+                        });
+
+                        var arr = [11, 23];
+                        Utils.each(arr, function(i, item) {
+                            this.log(i, item);
+                        }).type(arr, function(type) {
+                            this.log(type);
+                        });
+
+                        // use addMethods
+                        var Util = function() {}
+                        Util.addMethods({
+                            each: function(arr, callback) {
+                                if (!arr) return false;
+                                var i = 0,
+                                    len = arr.length,
+                                    singleObj, isBreak;
+                                for (; singleObj = arr[i++];) {
+                                    isBreak = callback && callback.call(this, i, singleObj);
+                                    if (isBreak) break;
+                                }
+                                return this;
+                            },
+                            type: function(value, callback) {
+                                var result = Object.prototype.toString.call(value);
+                                if (!value) return undefined;
+                                var prefix = '[object ',
+                                    type;
+                                type = result.substring(result.indexOf('[') + prefix.length, result.indexOf(']')).toLowerCase();
+                                callback.call(this, type);
+                                return this;
+                            },
+                            log: function() {
+                                console && console.info('Util:\t', arguments);
+                            }
+                        });
+                        Util.each(arr, function(i, item) {
+                            this.log(i, item);
+                        }).type(arr, function(type) {
+                            this.log(type);
+                        });
+                        for (var key in Util) {
+                            console.log(key, Util, '\tUtil\'s key and value');
+                        }
+                    }
+                    break;
+                case 3:
+                    // 3.定义一个既可以为函数原型添加方法，又可以为自己添加方法的addMethod方法
+                    Function.prototype.addMethod = function() {
+                        var opts = arguments[0],
+                            type,
+                            fn;
+                        // console.log(opts);
+                        for (var key in opts) {
+                            type = /^[a-z]+$/.test(key),
+                                fn = opts[key];
+                            // console.log(key, type, fn, '----');
+                            if (Object.prototype.toString.call(fn) != '[object Function]') throw new Error('fn(' + fn + ') is not function');
+                            if (type) {
+                                this.prototype[key] = fn;
+                            } else {
+                                this[key.toLowerCase()] = fn;
+                            }
+                        }
+                        return this;
+                    }
+
+                    // single pattern:
+                    // http://www.cnblogs.com/TomXu/archive/2012/02/20/2352817.html
+                    var Utils,
+                        UtilsType = 1; // change this to show different single implement
+                    switch (UtilsType) {
+                        case 1:
+                            Utils = function() {
+                                if (Utils.unique !== undefined) {
+                                    return Utils.unique;
+                                }
+                                var that = this;
+                                this.count = 0;
+                                this.showCount = function() {
+                                    console.log('count: ' + that.count++);
+                                }
+                                Utils.unique = this;
+                            };
+                            break;
+                        case 2: // TODO: ?不太明白？
+                            Utils = funciton() {
+                                // 缓存的实例
+                                var instance = this;
+                                this.count = 0;
+                                this.showCount = function() {
+                                        console.log('count: ' + that.count++);
+                                    }
+                                    // 重写构造函数
+                                Utils = function() {
+                                    return instance;
+                                }
+                            }
+                            break;
+                        case 3: // TODO: ?不太明白？
+                            Utils = function() {
+                                // 缓存实例
+                                var instance;
+
+                                // 重新构造函数
+                                Utils = function Universe() {
+                                    return instance;
+                                };
+
+                                // 后期处理原型属性
+                                Utils.prototype = this;
+
+                                // 实例
+                                instance = new Utils();
+
+                                // 重设构造函数指针
+                                instance.constructor = Utils;
+
+                                // 其他功能
+                                instance.count = 0;
+                                instance.showCount = function() {
+                                    console.log('count: ' + that.count++);
+                                }
+                                return instance;
+                            }
+                            break;
+                        case 4: // TODO: 利用闭包，以及instance的私有变量，实现单例
+                            (function() {
+                                var instance;
+
+                                Utils = function Utils() {
+
+                                    if (instance) {
+                                        return instance;
+                                    }
+
+                                    instance = this;
+
+                                    // 其它内容
+                                    this.count = 0;
+                                    this.showCount = function() {
+                                        console.log('count: ' + that.count++);
+                                    }
+                                };
+                            }());
+                            break;
+                        default:
+
+                    }
+
+                    Utils.addMethod({
+                        HELLO: function() {
+                            console.log('hello, how are you?');
+                            return this;
+                        },
+                        answer: function() {
+                            console.log('hi, I am fine, and you?');
+                            return this;
+                        },
+                        reply: function() {
+                            console.log('fine, too!');
+                            return this;
+                        }
+                    });
+
+                    // TODO?: some questions:
+                    // 需求：既可以为函数原型添加方法，又可以为自己添加方法
+                    // 问题：声明一个函数变量，函数变量的原型添加的方法是，是这个函数的自己的吧；直接添加到函数上面的，是函数的静态变量吧，使用和[var func = {}; func.add = funciton(){}]没有区别吧；
+                    //      自己的方法，理解是创建一个对象，然后这个对象可以调用的方法，函数静态函数用这个新创建的是无法调用到的；
+                    //      [var func = function(){}; func.prototyp.add = function(){}; var f = func(); f.add();] add为原型添加的函数,也是自己的函数；
+                    // 结论：【怀疑】：既可以为函数原型添加方法（也就是函数自己添加方法），又尅添加静态方法；
+                    // var func = function(){}; func.add = function(){}
+                    Utils.hello();
+                    new Utils().answer().showCount();
+                    new Utils().reply().showCount();
+
+                    break;
+                default:
+
             }
-            Utils.addMethod('each', function(arr, callback){
-                if(!arr) return false;
-                var i = 0, len = arr.length, singleObj, isBreak;
-                for(;singleObj = arr[i++];){
-                    isBreak = callback && callback.call(this, singleObj);
-                    if(isBreak) break;
-                }
-            }).addMethod('type', function(value){
-                var result = Object.prototype.toString.call(value);
-                if(!value) return undefined;
-                var prefix = '[object '
-                return result.substring(result.indexOf('[')+prefix.length,result.indexOf(']')).toLowerCase();
-            })
 
-            var arr = [1, 23];
-            // TODO: is this right?
-
-            // 3.定义一个既可以为函数原型添加方法，又可以为自己添加方法的addMethod方法
-            // TODO:?
+            answer && answer.call(this);
 
             // last check method
             win.check = check;
