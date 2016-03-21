@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Object inherit</title>
+</head>
+<body>
+    <script src="../utils.js" charset="utf-8"></script>
+    <script type="text/javascript">
+        // 1.闭包（有权访问另一个函数作用域内变量的函数，即在一个函数内创建另一个函数）实现js类；
+        var Book = (function(){
+            // 静态私有变量
+            var bookNum = 0,
+                ids = [],
+                books = [];
+            // 静态私有函数
+            function checkNum(name){
+                bookNum = books[name] || 0;
+                bookNum++;
+                if(bookNum > 100){
+                    throw new Error('我们仅仅出版100本书');
+                }else{
+                    books[name] = bookNum;
+                }
+            }
+            function checkID(_id){
+                if(ids.find(function(id){ return id == _id; })){
+                    throw new Error('id('+_id+')已经存在!');
+                }else{
+                    ids.push(_id);
+                }
+            }
+            // 创建类
+            function _book(newId, newName, newPrice){
+                // 安全构造
+                if(this instanceof _book){
+                }else{
+                    return new _book(newId, newName, newPrice);
+                }
+
+                // 私有变量
+                var name,
+                    price,
+                    that = this;
+                function setID(_id){
+                    that.id = _id;
+                }
+                function setName(_name){
+                    name = _name;
+                }
+                function setPrice(_price){
+                    price = _price;
+                }
+
+                // 特权方法
+                this.getName = function(){
+                    return name;
+                }
+                this.getPrice = function(){
+                    return price;
+                }
+
+                // 共有属性
+                this.id = newId;
+                // 共有方法
+                // TODO: 浅copy与深copy
+                this.copy = function(){}
+                // 检测
+                checkNum(newName);
+                checkID(newId);
+                // 构造器
+                setID(newId);
+                setName(newName);
+                setPrice(newPrice);
+            }
+            // 构造原型
+            _book.prototype = {
+                // 静态公有属性
+                isJSBook: false,
+                // 静态共有方法
+                display: function(){
+                    window.console && window.console.log('id: ' + this.id + '\tname:' + this.getName() + '\tprice: ' + this.getPrice());
+                }
+            }
+            // 返回类
+            return _book;
+        }())
+
+        var book = new Book('book1', 'jsBook', '23');
+        var book2 = Book('book2', 'cssBook', '13');
+        book.display();
+        book2.display();
+        console.log(Book.prototype);
+        console.log(Book.prototype.isJSBook);
+        console.log(Book.prototype.display);
+        console.log(Book.prototype === book.__proto__);
+    </script>
+</body>
+</html>

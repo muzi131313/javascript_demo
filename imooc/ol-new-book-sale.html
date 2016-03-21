@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title> p标签</title>
+<style>
+    *{padding:0px;margin:0px;}
+    img{width:80px;}
+    body{font-size:14px;}
+    .color-b{color:blue;}
+    .top{border:1px solid gray;}
+    .top-title{text-indent:1em;background-color:yellow;}
+    .top-content{background-color:rgb(181, 177, 61); padding: 5px 0px;}
+    .top-content .top-item{ border-bottom:1px gray dashed;line-height:1.5em; margin: 3px 30px;clear:both;}
+    .top-content .active{background-color:white; padding:10px 0px;height:6em;}
+    .top-content .top-item div{float:left;}
+    .top-content .top-item dl{margin-left:5px;float:left;}
+    .top-content .top-item dl dd{margin-top:10px;}
+    .top-content .top-item dl dd p{overflow:hidden;width:150px;white-space:nowrap;text-overflow:ellipsis;}
+</style>
+</head>
+<body>
+    <div class="top">
+    <h3 class="top-title">新书热卖</h3>
+    <ol class="top-content">
+        <li class="top-item active" type="1">
+            <div>
+                <img src="http://f.hiphotos.baidu.com/image/h%3D200/sign=d9c2d17b1a950a7b6a3549c43ad0625c/14ce36d3d539b600af3985faee50352ac75cb78c.jpg"/>
+            </div>
+            <dl>
+                <dt class="color-b">不省心（冯小刚）</dt>
+                <dd>
+                    <p>作者：冯小刚</p>
+                    <p>出版社：长江文艺出版社</p>
+                    <p>出版时间：2013年09月</p>
+                </dd>
+            </dl>
+        </li>
+        <li class="top-item color-b">我承认我不曾历经沧桑</li>
+        <li class="top-item color-b">不为遇见，只为远方</li>
+        <li class="top-item color-b">站在两个世界的边缘</li>
+    </ol>
+    </div>
+    <p>
+        这个是原型的图片：
+    </p>
+    <img src="http://img.mukewang.com/52d3884a00014b0702270264.jpg" alt="" />
+    <p>
+        问题：<br/>
+        通过ol的有序，然后给ol的序号设置样式，上面ol中li序号放到里面是：list-style-position: inside，不过这样第一行就乱套了；</br>
+        后续：<br/>
+        问过做静态的同事，网上也找到资料，不过好像没有通过ol的样式直接达到途中的效果，也是醉了<br/>
+        问题来源：<a href="http://www.imooc.com/code/289">传送门</a> <br/>
+    </p>
+    <script>
+        // 这个是张大大的关于ol的博客，搜藏一下
+        // http://www.zhangxinxu.com/wordpress/2009/12/html-css列表元素uloldl的研究与应用/
+    </script>
+</body>
+</html>
