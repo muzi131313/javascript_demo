@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>extend</title>
+</head>
+<body>
+    <script type="text/javascript">
+        // 类式继承
+        // 声明父类
+        function SuperClass(){
+            this.superValue = true;
+        }
+        // 为父类添加共有方法
+        SuperClass.prototype.getSuperValue = function(){
+            return this.superValue;
+        }
+        // 声明子类
+        function SubClass(){
+            this.subValue = false;
+        }
+        // 继承父类
+        SubClass.prototype = new SuperClass();
+        // 为子类添加共有方法
+        SubClass.prototype.getSubValue = function(){
+            return this.subValue;
+        }
+
+        // show result:
+        var subClass = new SubClass();
+        console.log(subClass.getSubValue);
+        console.log(subClass.getSuperValue);
+        console.log(subClass.prototype instanceof SuperClass); // 子类原型继承父类
+    </script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>pub-sub</title>
+</head>
+<body>
+	<script type="text/javascript" src="http://cdn.bootcss.com/backbone.js/1.3.3/backbone-min.js"></script>
+	<script type="text/javascript">
+		(function () {
+			var Event = {
+				clients: {},
+				listen: function (key, fn) {
+					if(!this.clients[key]){
+						this.clients[key] = [];
+					}
+					this.clients[key].push(fn);
+				},
+				trigger: function () {
+					var key = Array.prototype.shift.call(arguments),
+						fns = this.clients[key];
+
+					if(!fns || fns.length == 0){
+						return;
+					}
+
+					for(var i = 0, fn;fn = fns[i++];){
+						fn.apply(this, arguments);
+					}
+				},
+				remove: function (key, fn) {
+					var fns = this.clients[key];
+
+					if(!fns){
+						return;
+					}
+					if(!key){
+						fns && (fns.length = 0); // if the key is empty, means remove all the bind method
+					}else{
+						for(var i = 0, len = fns.length;i < len;i++){
+							if(fns[i] === fn){
+								fns.splice(i, 1); // remove the method from the sub list
+							}
+						}
+					}
+				}
+			}, installEvent = function (obj) {
+				for(var key in Event){
+					obj[key] = Event[key];
+				}
+			};
+
+			var person = {};
+			installEvent(person);
+			var showPerson = function (_person) {
+				if(!_person) return;
+				if(_person.hasOwnProperty('name')) console.log('name: ' + _person.name);
+				if(_person.hasOwnProperty('length')) console.log('length: ' + _person.length);
+			}, showAction = function (_person) {
+				if(!_person) return;
+				if(_person.hasOwnProperty('eyeShape')) console.log('her eye is ' + _person.eyeShape);
+				if(_person.hasOwnProperty('smile')) console.log('her smile is ' + _person.smile);
+			};
+			person.listen('show', showPerson);
+
+			person.listen('show', showAction);
+
+			person.remove('show', showPerson);
+
+			person.trigger('show', {name: 'dear girl friend', length: '160'});
+			person.trigger('show', {eyeShape: 'big', smile: 'sweet'});
+		})();
+	</script>
+</body>
+</html>
