@@ -572,7 +572,7 @@
                     // 问题：声明一个函数变量，函数变量的原型添加的方法是，是这个函数的自己的吧；直接添加到函数上面的，是函数的静态变量吧，使用和[var func = {}; func.add = funciton(){}]没有区别吧；
                     //      自己的方法，理解是创建一个对象，然后这个对象可以调用的方法，函数静态函数用这个新创建的是无法调用到的；
                     //      [var func = function(){}; func.prototyp.add = function(){}; var f = func(); f.add();] add为原型添加的函数,也是自己的函数；
-                    // 结论：【怀疑】：既可以为函数原型添加方法（也就是函数自己添加方法），又尅添加静态方法；
+                    // 结论：【怀疑】：既可以为函数原型添加方法（也就是函数自己添加方法），又可以添加静态方法；
                     // var func = function(){}; func.add = function(){}
                     Utils.hello();
                     new Utils().answer().showCount();

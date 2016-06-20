@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>index</title>
+</head>
+<body>
+	<button id="button1">刷新</button>
+	<button id="button2">添加</button>
+	<button id="button3">删除</button>
+	<script type="text/javascript">
+		(function () {
+			var button1 = document.getElementById('button1'),
+				button2 = document.getElementById('button2'),
+				button3 = document.getElementById('button3'),
+				bindClick = function (button, clickEvent) {
+					button.onclick = clickEvent;
+				}, menuBar = {
+					refresh: function () {
+						console.log('刷新菜单界面');
+					}
+				}, subBar = {
+					add: function () {
+						console.log('添加子菜单');
+					},
+					del: function () {
+						console.log('删除子菜单');
+					}
+				};
+
+			bindClick(button1, menuBar.refresh);
+			bindClick(button2, subBar.add);
+			bindClick(button3, subBar.del);
+		})();
+	</script>
+</body>
+</html>

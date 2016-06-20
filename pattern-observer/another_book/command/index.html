@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>index</title>
+</head>
+<body>
+	<button id="button1">按钮1</button>
+	<button id="button2">按钮2</button>
+	<button id="button3">按钮3</button>
+	<script type="text/javascript">
+		(function () {
+			var button1 = document.getElementById('button1'),
+				button2 = document.getElementById('button2'),
+				button3 = document.getElementById('button3'),
+				setCommand = function (button, command) {
+					button.onclick = function () {
+						command.excute && command.excute();
+					}
+				},
+				MenuBar = {
+					refresh: function (){
+						console.log('刷新菜单目录');
+					}
+				},
+				SubMenu = {
+					add: function () {
+						console.log('增加子菜单');
+					},
+					del: function () {
+						console.log('删除子菜单');
+					}
+				},
+				RefreshMenuBarCommand = function (receiver) {
+					this.receiver = receiver;
+				},
+				AddMenuBarCommand = function (receiver) {
+					this.receiver = receiver;
+				},
+				DelMenuBarCommand = function (receiver) {
+					this.receiver = receiver;
+				};
+
+			RefreshMenuBarCommand.prototype.excute = function() {
+				this.receiver.refresh();
+			};
+
+			AddMenuBarCommand.prototype.excute = function() {
+				this.receiver.add();
+			};
+
+			DelMenuBarCommand.prototype.excute = function() {
+				this.receiver.del();
+			};
+
+			var refreshMenu = new RefreshMenuBarCommand(MenuBar),
+				addMenu = new AddMenuBarCommand(SubMenu),
+				delMenu = new DelMenuBarCommand(SubMenu);
+
+			setCommand(button1, refreshMenu);
+			setCommand(button2, addMenu);
+			setCommand(button3, delMenu);
+		})();
+	</script>
+</body>
+</html>
