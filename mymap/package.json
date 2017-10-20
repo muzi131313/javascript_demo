@@ -1,0 +1,31 @@
+{
+  "name": "mymap",
+  "version": "1.0.0",
+  "description": "地图相关的demo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack",
+    "dev": "webpack-dev-server --hot --inline"
+  },
+  "keywords": [
+    "mymap"
+  ],
+  "author": "muzi131313",
+  "license": "MIT",
+  "dependencies": {
+    "postscribe": "^2.0.8"
+  },
+  "devDependencies": {
+    "css-loader": "^0.28.0",
+    "html-webpack-plugin": "^2.28.0",
+    "jsx-loader": "^0.13.2",
+    "node-sass": "^4.5.2",
+    "postscribe": "^2.0.8",
+    "sass-loader": "^6.0.3",
+    "style-loader": "^0.16.1",
+    "url-loader": "^0.5.8",
+    "webpack": "^2.4.1",
+    "webpack-dev-server": "^2.4.4"
+  }
+}
