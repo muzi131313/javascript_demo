@@ -1,3 +1,9 @@
+/**
+ * @file string.js
+ * @author liyanfeng
+ * @description 字符工具类
+ * @createTime 2017年12月21日21:39:50
+ */
 var StringUtils = {
     /**
      * [strCharLength 判断字符所占长度(倒序判断长度)]
@@ -35,12 +41,11 @@ var StringUtils = {
             charLength += this.charLength(char);
             if (charLength <= pos) {
                 subChars.push(char);
-            };
+            }
         } while (++i < len);
         if (charLength > pos) {
             subChars.push('...');
         }
-
         return subChars.join('');
     }
-}
+};
