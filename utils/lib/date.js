@@ -1,6 +1,8 @@
 /**
  * @file utils/lib/date.js
  * @description 时间工具类
+ * @doc-name: 万能日期函数
+ * @doc http://jo2.org/javascript-date-formatter/
  * @created 2019年11月05日16:39:47
  */
 var dateFormat = (date, fmt = 'yyyy-MM-ddThh:mm:ss.SZ') => {
@@ -11,10 +13,22 @@ var dateFormat = (date, fmt = 'yyyy-MM-ddThh:mm:ss.SZ') => {
       'm+': date.getMinutes(), // 分
       's+': date.getSeconds(), // 秒
       'q+': Math.floor((date.getMonth() + 3) / 3), // 季度
+      't+': (() => {
+        var hours = date.getHours()
+        var minus = hours / 12
+        return minus > 1.5 
+          ? '晚上'
+          : minus > 1
+            ? '下午'
+            : minus > 0.5
+              ? '上午'
+              : '凌晨'
+      })(), // 12小时制
+      'H+': date.getHours() > 12 ? date.getHours() - 12 : date.getHours(), // 12小时制小时, 
       'S': date.getMilliseconds() // 毫秒
   };
+  // 年份处理
   if (/(y+)/.test(fmt)) {
-      console.log('hhhh');
       fmt = fmt.replace(
           RegExp.$1,
           (date.getFullYear() + '').substr(4 - RegExp.$1.length)
@@ -22,7 +36,6 @@ var dateFormat = (date, fmt = 'yyyy-MM-ddThh:mm:ss.SZ') => {
   }
   for (var k in o) {
       if (new RegExp('(' + k + ')').test(fmt)) {
-          console.log('every: ', RegExp.$1, RegExp.$1.length === 1, o[k], ('00' + o[k]).substr(('' + o[k]).length));
           fmt = fmt.replace(
               RegExp.$1,
               RegExp.$1.length === 1
@@ -36,6 +49,13 @@ var dateFormat = (date, fmt = 'yyyy-MM-ddThh:mm:ss.SZ') => {
 
 // var dd = dateFormat(new Date('2018/05/13'));
 // console.log('dd: ', dd);
+// var d = new Date()
+// var date = dateFormat(d, 'yy-MM-dd')
+// var dateTime = dateFormat(d, 'yyyy-MM-dd hh:mm:ss')
+// var dateTimeOne = dateFormat(d, 'yyyy年MM月dd日 tHH点mm分')
+// console.log(date)
+// console.log(dateTime)
+// console.log(dateTimeOne)
 
 // 月份的最后一天
 var lastDayOfMonth = date => {
